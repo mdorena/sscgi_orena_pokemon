@@ -15,6 +15,7 @@ class Pokemon {
       console.log(`Critical hit!`);
       opponent.damageRecieved(this.damage * 2);
     } else {
+      console.log(`Regular hit!`);
       opponent.damageRecieved(this.damage);
     }
   }
@@ -23,11 +24,25 @@ class Pokemon {
     console.log(`${this.name} HEALS now has ${this.hp} HP`);
   }
   damageRecieved(damage) {
-    this.hp -= damage;
-    if (this.hp <= 0) {
-      console.log(`${this.name} has fainted!`);
+    if (this.defense <= 0) {
+      this.hp -= damage;
+      if (this.hp <= 0) {
+        console.log(`${this.name} has fainted!`);
+      } else {
+        console.log(`${this.name} has ${this.hp} HP left`);
+      }
     } else {
-      console.log(`${this.name} has ${this.hp} HP left`);
+      if (this.defense >= damage) {
+        this.defense -= damage;
+        console.log(
+          `Shield has been used, ${this.name} has ${this.defense} defense left`
+        );
+      } else {
+        let damageRemaining = damage - this.defense;
+        this.hp -= damageRemaining;
+        console.log(`All remaing shield has been used`);
+        console.log(`${this.name} has ${this.hp} HP left`);
+      }
     }
   }
 
@@ -74,13 +89,19 @@ class Trainer {
     this.numeberOfHealPotion = numeberOfHealPotion;
     this.pokemons = pokemons;
   }
+  showAvailablePokemons() {
+    console.log(`Showing all ${this.name} available pokemon's...`);
+    for (let i = 0; i < this.pokemons.length; i++) {
+      console.log(`${i + 1} ${this.pokemons[i].name}`);
+    }
+  }
 }
 // Water type pokemons
-let Blastoise = new Pokemon("Blastoise", "Water", 1, 50, 10, 5, 0.1);
-let Squirtle = new Pokemon("Squirtle", "Water", 1, 50, 10, 5, 0.1);
-let Azumarill = new Pokemon("Azumarill", "Water", 1, 50, 10, 5, 0.1);
-let Chinchou = new Pokemon("Chinchou", "Water", 1, 50, 10, 5, 0.1);
-let Staryu = new Pokemon("Staryu", "Water", 1, 50, 10, 5, 0.1);
+let Blastoise = new Pokemon("Blastoise", "Water", 1, 50, 10, 5, 0.05);
+let Squirtle = new Pokemon("Squirtle", "Water", 1, 50, 10, 5, 0.05);
+let Azumarill = new Pokemon("Azumarill", "Water", 1, 50, 10, 5, 0.05);
+let Chinchou = new Pokemon("Chinchou", "Water", 1, 50, 10, 5, 0.05);
+let Staryu = new Pokemon("Staryu", "Water", 1, 50, 10, 5, 0.05);
 // water pokemons trainer
 let Misty = new Trainer("Misty", 5, [
   Blastoise,
@@ -90,11 +111,11 @@ let Misty = new Trainer("Misty", 5, [
   Staryu,
 ]);
 // Fire type
-let Charmander = new Pokemon("Charmander", "Fire", 1, 50, 10, 5, 0.1);
-let Rapidash = new Pokemon("Rapidash", "Fire", 1, 50, 10, 5, 0.1);
-let Charizard = new Pokemon("Charizard", "Fire", 1, 50, 10, 5, 0.1);
-let Charmeleon = new Pokemon("Charmeleon", "Fire", 1, 50, 10, 5, 0.1);
-let Vulpix = new Pokemon("Vulpix", "Fire", 1, 50, 10, 5, 0.1);
+let Charmander = new Pokemon("Charmander", "Fire", 1, 50, 10, 5, 0.05);
+let Rapidash = new Pokemon("Rapidash", "Fire", 1, 50, 10, 5, 0.05);
+let Charizard = new Pokemon("Charizard", "Fire", 1, 50, 10, 5, 0.05);
+let Charmeleon = new Pokemon("Charmeleon", "Fire", 1, 50, 10, 5, 0.05);
+let Vulpix = new Pokemon("Vulpix", "Fire", 1, 50, 10, 5, 0.05);
 // Fire pokemons trainer
 let Asahi = new Trainer("Asahi ", 5, [
   Charmander,
@@ -104,11 +125,11 @@ let Asahi = new Trainer("Asahi ", 5, [
   Vulpix,
 ]);
 // Electric type
-let Pikachu = new Pokemon("Pikachu", "Electric", 1, 50, 10, 5, 0.1);
-let Raichu = new Pokemon("Raichu", "Electric", 1, 50, 10, 5, 0.1);
-let Magnemite = new Pokemon("Magnemite", "Electric", 1, 50, 10, 5, 0.1);
-let Magneton = new Pokemon("Magneton", "Electric", 1, 50, 10, 5, 0.1);
-let Electabuzz = new Pokemon("Electabuzz", "Electric", 1, 50, 10, 5, 0.1);
+let Pikachu = new Pokemon("Pikachu", "Electric", 1, 50, 10, 5, 0.05);
+let Raichu = new Pokemon("Raichu", "Electric", 1, 50, 10, 5, 0.05);
+let Magnemite = new Pokemon("Magnemite", "Electric", 1, 50, 10, 5, 0.05);
+let Magneton = new Pokemon("Magneton", "Electric", 1, 50, 10, 5, 0.05);
+let Electabuzz = new Pokemon("Electabuzz", "Electric", 1, 50, 10, 5, 0.05);
 // Fire pokemons trainer
 let Ash = new Trainer("Ash ", 5, [
   Pikachu,
@@ -118,11 +139,11 @@ let Ash = new Trainer("Ash ", 5, [
   Electabuzz,
 ]);
 // Poison type
-let Ekans = new Pokemon("Ekans", "Poison", 1, 50, 10, 5, 0.1);
-let Arbok = new Pokemon("Arbok", "Poison", 1, 50, 10, 5, 0.1);
-let Nidoran = new Pokemon("Nidoran", "Poison", 1, 50, 10, 5, 0.1);
-let Nidorino = new Pokemon("Nidorino", "Poison", 1, 50, 10, 5, 0.1);
-let Nidoking = new Pokemon("Nidoking", "Poison", 1, 50, 10, 5, 0.1);
+let Ekans = new Pokemon("Ekans", "Poison", 1, 50, 10, 5, 0.05);
+let Arbok = new Pokemon("Arbok", "Poison", 1, 50, 10, 5, 0.05);
+let Nidoran = new Pokemon("Nidoran", "Poison", 1, 50, 10, 5, 0.05);
+let Nidorino = new Pokemon("Nidorino", "Poison", 1, 50, 10, 5, 0.05);
+let Nidoking = new Pokemon("Nidoking", "Poison", 1, 50, 10, 5, 0.05);
 // Poison pokemons trainer
 let Agatha = new Trainer("Agatha ", 5, [
   Ekans,
@@ -132,11 +153,11 @@ let Agatha = new Trainer("Agatha ", 5, [
   Nidoking,
 ]);
 // Flying typr
-let Pidgeot = new Pokemon("Pidgeot", "Flying", 1, 50, 10, 5, 0.1);
-let Spearow = new Pokemon("Spearow", "Flying", 1, 50, 10, 5, 0.1);
-let Articuno = new Pokemon("Articuno", "Flying", 1, 50, 10, 5, 0.1);
-let Zapdos = new Pokemon("Zapdos", "Flying", 1, 50, 10, 5, 0.1);
-let Aerodactyl = new Pokemon("Aerodactyl", "Flying", 1, 50, 10, 5, 0.1);
+let Pidgeot = new Pokemon("Pidgeot", "Flying", 1, 50, 10, 5, 0.05);
+let Spearow = new Pokemon("Spearow", "Flying", 1, 50, 10, 5, 0.05);
+let Articuno = new Pokemon("Articuno", "Flying", 1, 50, 10, 5, 0.05);
+let Zapdos = new Pokemon("Zapdos", "Flying", 1, 50, 10, 5, 0.05);
+let Aerodactyl = new Pokemon("Aerodactyl", "Flying", 1, 50, 10, 5, 0.05);
 // Flying pokemons trainer
 let Kahili = new Trainer("Kahili ", 5, [
   Pidgeot,
@@ -173,36 +194,40 @@ class Battle {
       if (randomInt == 1) {
         this.pokemon1.attack(this.pokemon2);
         if (this.pokemon2.hp <= 0) {
-          this.pokemon1.levelUp();
           console.log(
             `${this.pokemon1.name} has gained the victory over ${this.pokemon2.name}`
           );
+          this.pokemon1.levelUp();
+
           return true;
         } else {
           this.pokemon2.attack(this.pokemon1);
           if (this.pokemon1.hp <= 0) {
-            this.pokemon2.levelUp();
             console.log(
               `${this.pokemon2.name} has gained the victory over ${this.pokemon1.name}`
             );
+            this.pokemon2.levelUp();
+
             return false;
           }
         }
       } else {
         this.pokemon2.attack(this.pokemon1);
         if (this.pokemon1.hp <= 0) {
-          this.pokemon2.levelUp();
           console.log(
             `${this.pokemon2.name} has gained the victory over ${this.pokemon1.name}`
           );
+          this.pokemon2.levelUp();
+
           return false;
         } else {
           this.pokemon1.attack(this.pokemon2);
           if (this.pokemon2.hp <= 0) {
-            this.pokemon1.levelUp();
             console.log(
               `${this.pokemon1.name} has gained the victory over ${this.pokemon2.name}`
             );
+            this.pokemon1.levelUp();
+
             return true;
           }
         }
@@ -210,17 +235,24 @@ class Battle {
     }
   }
 }
-let ashPokemon1 = Ash.pokemons[0];
-let ashPokemon2 = Ash.pokemons[1];
-let checkHP1 = ashPokemon1.hp;
-let checkHP2 = ashPokemon2.hp;
-let battle = new Battle(ashPokemon1, ashPokemon2).begun();
-if (battle) {
-  console.log(checkHP1);
-  console.log(checkHP2);
+class trainerVsTrainer {
+  constructor(trainer1, trainer2) {
+    this.trainer1 = trainer1;
+    this.trainer2 = trainer2;
+  }
+  battleBegun() {
+    console.log(this.trainer1.pokemons.length);
+  }
 }
-
-// Test with 20% and 50% critical chance
-// console.log(criticalHit(0.2));
-// 20% chance for critical hit
-// checkCriticcalHit(0.5); // 50% chance for critical hit
+class Tournament {
+  constructor(trainers) {
+    this.trainers = trainers;
+  }
+  begun() {
+    console.log(this.trainers.length);
+  }
+}
+let ashPokemon1 = Ash.pokemons[0];
+let MistyPokemon2 = Misty.pokemons[1];
+let battle = new Battle(ashPokemon1, MistyPokemon2);
+battle.begun();
