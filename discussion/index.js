@@ -89,3 +89,38 @@ constFunc = function () {
   console.log("Re assigned consFunct ");
 };
 constFunc();
+
+// Parameters and Arguments
+
+function printThisName(name) {
+  console.log("My name is " + name);
+  // name is called parameter
+}
+
+printThisName("ANGELO");
+// ANGELO = argument
+// a parametr acts as a named variables  containers
+// that ezistas only inside funtion
+
+// it is used a store information is procied to
+// to a dfunction when it is called/invokes
+
+/*
+An arguamments is a vale passed when invoking a funtions,
+this is argument is then stored as the paramaether withing
+the functions
+*/
+
+printThisName("ahah", 12);
+
+function argumentFunction() {
+  console.log(
+    "This function was passed as an argument before the message was printed"
+  );
+}
+
+function invokeFunction(argumentFunction) {
+  argumentFunction();
+}
+invokeFunction(argumentFunction);
+// invoke function
