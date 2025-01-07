@@ -12,25 +12,26 @@ class Pokemon {
     this.attackName = `${type} Attack!`;
   }
   attack(opponent) {
+    // switch is to indetify type and change background color based on it
     switch (this.type) {
       case "Water":
         console.log(
           `${this.name} used an %c${this.attackName}`,
-          "background: #489fb5; color: white; padding: 2px;   font-size: 15px;",
+          "background: #489fb5; color: white; padding: 10px;   font-size: 15px; border-radius: 10px;",
           ` on ${opponent.name}, `
         );
         break;
       case "Fire":
         console.log(
           `${this.name} used an %c${this.attackName}`,
-          "background: #d00000; color: white; padding: 2px;  font-size: 15px",
+          "background: #d00000; color: white; padding: 10px;  font-size: 15px; border-radius: 10px;",
           ` on ${opponent.name}, `
         );
         break;
       case "Electric":
         console.log(
           `${this.name} used an %c${this.attackName}`,
-          "background: #ffd60a; color: white; padding: 2px;  font-size: 15px",
+          "background: #ffd60a; color: white; padding: 10px;  font-size: 15px; border-radius: 10px;",
           ` on ${opponent.name}, `
         );
         break;
@@ -38,21 +39,21 @@ class Pokemon {
       case "Poison":
         console.log(
           `${this.name} used an %c${this.attackName}`,
-          "background: #001219; color: white; padding: 2px;   font-size: 15px",
+          "background: #001219; color: white; padding: 10px;   font-size: 15px; border-radius: 10px;",
           ` on ${opponent.name}, `
         );
         break;
       case "Flying":
         console.log(
           `${this.name} used an %c${this.attackName}`,
-          "background: #90e0ef; color: black; padding: 2px; font-size: 15px",
+          "background: #90e0ef; color: black; padding: 10px; font-size: 15px; border-radius: 10px;",
           ` on ${opponent.name}, `
         );
         break;
       case "Legendary":
         console.log(
           `${this.name} used an %c${this.attackName}`,
-          "background: linear-gradient(to bottom, #ffffcc 0%, #00ffcc 100%); color: black; padding: 2px; font-weight: bold; border:  solid 1px black; 2px; font-size: 20px",
+          "background: linear-gradient(to bottom, #ffffcc 0%, #00ffcc 100%); color: black; padding: 10px; font-weight: bold; border:  solid 1px black; 2px; font-size: 20px; border-radius: 10px;",
           ` on ${opponent.name}, `
         );
         break;
@@ -91,7 +92,7 @@ class Pokemon {
       if (this.hp <= 0) {
         console.log(
           `%c${this.name} has fainted!`,
-          "color: grey; font-weight:bold; text-transform: uppercase; "
+          "color: grey; font-weight:bold; text-transform: uppercase; font-size: 15px; "
         );
         this.hp = 0;
       } else {
@@ -126,8 +127,8 @@ class Pokemon {
     // heal is only applicable when
     this.hp += healV;
     console.log(
-      `%c${this.name} has healed + ${healV} HP! Current HP: ${this.hp}`,
-      "background: green; color: #eae2b7; padding: 5px"
+      `%c${this.name} health has been restored by + ${healV} HP! Current HP: ${this.hp}`,
+      "background: green; color: #ffff; padding: 5px"
     );
   }
   levelUp() {
@@ -138,19 +139,19 @@ class Pokemon {
       "background: #ffff3f; color: black; padding: 5px; font-weight: bold; border: solid 1px black"
     );
     if (this.level == 5) {
-      this.heal(20);
+      this.heal(30);
       this.damage *= 2;
       this.defense += 25;
       this.hp *= 2;
       this.criticalChance += 0.5;
     } else if (this.level == 10) {
-      this.heal(30);
+      this.heal(50);
       this.damage = Math.round(this.damage * 2.5);
       this.defense += 50;
       this.hp = Math.round(this.hp * 2.5);
       this.criticalChance += 0.15;
     } else if (this.level == 15) {
-      this.heal(50);
+      this.heal(100);
       this.pokemonEvolve();
       this.criticalChance += 0.15;
     } else {
@@ -162,9 +163,10 @@ class Pokemon {
     }
 
     console.log(
-      `HP ${this.hp}, DEFENSE ${this.defense} DAMAGE ${
+      `%c| HP ${this.hp} | DEFENSE ${this.defense} | DAMAGE ${
         this.damage
-      } CRIT. CHANCE ${this.criticalChance * 100}%`
+      } | CRIT. CHANCE ${this.criticalChance * 100}% |`,
+      "background: #ffff3f; color: black; padding: 5px; font-weight: bold; border: solid 1px black"
     );
   }
   //  to randomize crtical depending on critical chacne
@@ -190,9 +192,12 @@ class Trainer {
     console.log(`${this.name} available pokemon's;`);
     for (let i = 0; i < arrayMadeinBattle.length; i++) {
       console.log(
-        `${i + 1}. ${arrayMadeinBattle[i].name} | LVL: ${
+        `%c${i + 1}. ${arrayMadeinBattle[i].name} | LVL: ${
           arrayMadeinBattle[i].level
-        } | HP: ${arrayMadeinBattle[i].hp} |`
+        } | HP: ${arrayMadeinBattle[i].hp} | TYPE: ${
+          arrayMadeinBattle[i].type
+        } |`,
+        "background: blue; padding: 10px; color: white; margin: 2px; border-radius: 1rem; font-weight: bold;"
       );
     }
   }
@@ -267,10 +272,13 @@ class Tournament {
         if (trainer1Pokemons.length == 0) {
           stillHadPokemon = false;
           console.log(
-            `${trainer1.name} has no pokemon left. ${trainer2.name} wins the battle!`
+            `${trainer1.name} has no pokemon left. ` +
+              `%c${trainer2.name} wins the battle!`,
+            "font-size: 20px; font-weight: bold"
           );
           console.log(
-            `${trainer1.name} has been eliminated from the tournament`
+            `%c${trainer1.name} has been eliminated from the tournament`,
+            "color: grey; font-size:15px"
           );
           let index1 = this.trainers.indexOf(trainer1);
           this.trainers.splice(index1, 1);
@@ -282,10 +290,13 @@ class Tournament {
           stillHadPokemon = false;
 
           console.log(
-            `${trainer2.name} has no pokemon left. ${trainer1.name} wins the battle!`
+            `${trainer2.name} has no pokemon left. ` +
+              `%c${trainer1.name} wins the battle!`,
+            "font-size: 20px; font-weight: bold"
           );
           console.log(
-            `${trainer2.name} has been eliminated from the tournament`
+            `%c${trainer2.name} has been eliminated from the tournament`,
+            "color: grey; font-size:15px"
           );
           let index2 = this.trainers.indexOf(trainer2);
           this.trainers.splice(index2, 1);
@@ -302,22 +313,26 @@ class Tournament {
         if (numOfPokemonFight == 1) {
           console.log(`\n`);
           console.log(
-            `The ${numOfPokemonFight}st round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin!`
+            `%cThe ${numOfPokemonFight}st round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin!`,
+            "background-color: grey; padding: 5px 10px; font-size: 15px; color: white;  text-transform: uppercase; border-radius:1rem;"
           );
         } else if (numOfPokemonFight == 2) {
           console.log(`\n`);
           console.log(
-            `The ${numOfPokemonFight}nd round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin`
+            `%cThe ${numOfPokemonFight}nd round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin`,
+            "background-color: grey; padding: 5px 10px; font-size: 15px; color: white;  text-transform: uppercase; border-radius:1rem;"
           );
         } else if (numOfPokemonFight == 3) {
           console.log(`\n`);
           console.log(
-            `The ${numOfPokemonFight}rd round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin`
+            `%cThe ${numOfPokemonFight}rd round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin`,
+            "background-color: grey; padding: 5px 10px; font-size: 15px; color: white;  text-transform: uppercase; border-radius:1rem;"
           );
         } else {
           console.log(`\n`);
           console.log(
-            `The ${numOfPokemonFight}th round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin`
+            `%cThe ${numOfPokemonFight}th round of POKEMON MATCH between ${trainer1.name} and ${trainer2.name} is about to begin`,
+            "background-color: grey; padding: 5px 10px; font-size: 15px; color: white;  text-transform: uppercase; border-radius:1rem;"
           );
         }
         // showing available pokemons
@@ -343,7 +358,8 @@ class Tournament {
         let pokemon1 = trainer1.pokemons[indexPokemon1];
         let pokemon2 = trainer2.pokemons[indexPokemon2];
         console.log(
-          `The battle between ${pokemon1.name} and ${pokemon2.name} has begun!`
+          `%cThe battle between ${pokemon1.name} and ${pokemon2.name} has begun!`,
+          "font-size: 15px"
         );
         // while looop check if one of the pokemon has no hp
         while (pokemon1.hp > 0 && pokemon2.hp > 0) {
@@ -356,7 +372,7 @@ class Tournament {
             if (pokemon2.hp <= 0) {
               console.log(
                 `%c ${pokemon1.name} has gained the victory over ${pokemon2.name} `,
-                "background: linear-gradient(to bottom, #33ccff 0%, #33cc33 100%); color: black; padding: 10px; font-weight: bold;"
+                "background: green; color: black; padding: 10px; font-weight: bold; color: white;"
               );
 
               pokemon1.levelUp();
@@ -367,7 +383,7 @@ class Tournament {
               if (pokemon1.hp <= 0) {
                 console.log(
                   `%c ${pokemon2.name} has gained the victory over ${pokemon1.name} `,
-                  "background: linear-gradient(to bottom, #33ccff 0%, #33cc33 100%); color: black; padding: 10px; font-weight: bold;"
+                  "background: green; color: black; padding: 10px; font-weight: bold; color: white;"
                 );
                 pokemon2.levelUp();
                 trainer1Pokemons.splice(indexPokemon1, 1);
@@ -381,7 +397,7 @@ class Tournament {
             if (pokemon1.hp <= 0) {
               console.log(
                 `%c ${pokemon2.name} has gained the victory over ${pokemon1.name} `,
-                "background: linear-gradient(to bottom, #33ccff 0%, #33cc33 100%); color: black; padding: 10px; font-weight: bold;"
+                "background: green; color: black; padding: 10px; font-weight: bold; color: white;"
               );
               pokemon2.levelUp();
               trainer1Pokemons.splice(indexPokemon1, 1);
@@ -391,7 +407,7 @@ class Tournament {
               if (pokemon2.hp <= 0) {
                 console.log(
                   `%c ${pokemon1.name} has gained the victory over ${pokemon2.name} `,
-                  "background: linear-gradient(to bottom, #33ccff 0%, #33cc33 100%); color: black; padding: 10px; font-weight: bold;"
+                  "background: green; color: black; padding: 10px; font-weight: bold; color: white;"
                 );
                 pokemon1.levelUp();
                 trainer2Pokemons.splice(indexPokemon2, 1);
@@ -406,7 +422,7 @@ class Tournament {
     console.log(`\n`);
     console.log(
       `%c ${this.trainers[0].name} has emerged victorious in the tournament and is the ultimate POKEMON CHAMPION! `,
-      "  background: linear-gradient(to bottom, #ff0000 60%, #ffff00 100%); color:#fffcf2; font-weight: bold; padding: 20px;   font-size: 25px;"
+      "  background: linear-gradient(to bottom, #ff0000 60%, #ffff00 100%); color:#fffcf2; font-weight: 900; padding: 20px;   font-size: 26px; -webkit-text-stroke: 1px #010088; -webkit-text-fill-color: white; border-radius: 2rem"
     );
     console.log(`\n`);
   }
@@ -414,7 +430,7 @@ class Tournament {
   welcome() {
     console.log(
       "%c Welcome to the Tournament!",
-      "  background: linear-gradient(to bottom, #ff0000 60%, #ffff00 100%); color:#fffcf2; font-weight: bold; padding: 20px;"
+      "  background: linear-gradient(to bottom, #ff0000 60%, #ffff00 100%); color:#fffcf2; font-weight: bold; padding: 20px; font-size: 20px;"
     );
     console.log("The tournament will begin shortly.\n");
     console.log("Contestants;");

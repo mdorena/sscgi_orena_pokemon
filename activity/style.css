@@ -1,7 +1,44 @@
-tst {
+/* reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+}
+#landing {
+  padding: 0 2%;
+  width: 96%;
+  height: 100vh;
+  background-color: #64b5f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#pokeball {
+  width: 20%;
+  height: 20%;
+}
+#logo {
+  width: 50%;
+  height: auto;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.items {
+  width: 100%;
+  text-align: center;
+}
+h1 {
+  color: #f44336;
+  font-size: 5rem;
   text-transform: uppercase;
+  font-family: "Irish Grover", serif;
   font-weight: bold;
-  letter-spacing: 20;
-  font-size: 25px;
-  color: red;
+  font-style: normal;
+}
+h2 {
+  color: #212121;
+  font-weight: 400;
+  font-size: 2rem;
 }
