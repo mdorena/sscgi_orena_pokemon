@@ -189,14 +189,17 @@ class Trainer {
   // for shwong available pokemons i used arraMadeinBattle because
   // i created a new array in the tournament battle and thats what i identify here
   showAvailablePokemons(arrayMadeinBattle) {
-    console.log(`${this.name} available pokemon's;`);
+    console.log(
+      `%c${this.name} available pokemon's;`,
+      "font-size: 15px; margin-top: 10px"
+    );
     for (let i = 0; i < arrayMadeinBattle.length; i++) {
       console.log(
         `%c${i + 1}. ${arrayMadeinBattle[i].name} | LVL: ${
           arrayMadeinBattle[i].level
         } | HP: ${arrayMadeinBattle[i].hp} | TYPE: ${
           arrayMadeinBattle[i].type
-        } |`,
+        }`,
         "background: blue; padding: 10px; color: white; margin: 2px; border-radius: 1rem; font-weight: bold;"
       );
     }
